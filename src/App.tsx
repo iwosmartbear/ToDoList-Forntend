@@ -24,7 +24,7 @@ function App() {
     <div className="App">
             {[listOfToDos].length === 0 ?
                 <p>Nothing to show!</p> :
-                <Header list={listOfToDos as ToDoObject[]}/>}
+                <Header/>}
 
     </div>
   );

@@ -1,10 +1,12 @@
-
+import React from "react";
+import {Form} from "../common/Form/Form";
 
 export const Header = ()=>{
 
-    return(
-        <div>
-            <h1>Header here</h1>
-        </div>
-    )
+
+
+    return <div>
+        <Form />
+    </div>
+
 }

@@ -6,7 +6,6 @@ export const fetchToAPI = async (method: 'GET'|'POST'|'PUT'|'DELETE', path: stri
     try {
             const response = await fetch(`${hostUrl}${path}`, createHeaderAndBodyObject(method, toDoToChange));
             const data = await response.json();
-            console.log(data)
             return data;
     } catch(err){
         console.error(err)
