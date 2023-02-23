@@ -16,7 +16,7 @@ export const fetchToAPI = async (method: 'GET'|'POST'|'PUT'|'DELETE', path: stri
  const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): headerAndBodyObject =>{
     const headers = { 'Content-Type' : 'application/json',};
     const body = toDoToChange ?
-        toDoToChange
+        JSON.stringify(toDoToChange)
         : null;
 
     if (body){
