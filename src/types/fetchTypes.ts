@@ -8,7 +8,7 @@ export interface ToDoDTO {
     category: string;
     priority: 1|2|3|4|5;
     isOpen: 0|1;
-    dueDate: Date;
+    dueDate: Date | string;
 }
 
 export interface ToDoObject extends ToDoDTO{

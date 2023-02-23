@@ -1,6 +1,7 @@
 import {config} from "../config/config";
 import {headerAndBodyObject, ToDoDTO, ToDoObject} from "../types/fetchTypes";
 
+
 export const fetchToAPI = async (method: 'GET'|'POST'|'PUT'|'DELETE', path: string, toDoToChange?: ToDoDTO): Promise<ToDoObject | ToDoObject[] |string | null> =>{
     const hostUrl  = config.hostUrl;
     try {
@@ -12,8 +13,7 @@ export const fetchToAPI = async (method: 'GET'|'POST'|'PUT'|'DELETE', path: stri
         return err ? (err as Error).message : null;
     }
 }
-
-const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): headerAndBodyObject =>{
+ const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): headerAndBodyObject =>{
     const headers = { 'Content-Type' : 'application/json',};
     const body = toDoToChange ?
         toDoToChange
@@ -30,4 +30,8 @@ const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): head
         method,
         headers,
     }
+}
+
+export const changeDateFormat=(date: Date)=>{
+    return date.toISOString().slice(0, 10);
 }

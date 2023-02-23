@@ -1,0 +1,13 @@
+Button{
+    min-height: 10%;
+    margin: 0.1rem 2vw;
+    background-color: #5a5656;
+    opacity: 0.9;
+    color: white;
+    font-size: .9rem;
+    text-shadow: 0 0 1vh black;
+    border-radius: 5vh;
+    box-shadow: 0 0 1vh black;
+    cursor: auto;
+    transition: opacity 0.5s;
+}

@@ -1,10 +1,11 @@
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 
 import './Form.css'
 import {ToDoDTO} from "../../../types/fetchTypes";
 import {clearToDoObject} from "../../../utils/variables";
+import {changeDateFormat} from "../../../utils/functions";
 
 
 export function Form(){
@@ -17,14 +18,19 @@ export function Form(){
         })
     }
     function clearState(){
-        setMyState(clearToDoObject)
+        setMyState({
+            ...clearToDoObject,
+            dueDate: changeDateFormat(new Date()),
+        });
     }
 
-    function handleSubmit(){
+    function handleSubmit(e: FormEvent<HTMLFormElement>){
+        e.preventDefault();
 
+        clearState();
     }
 
-    return <form className="main-form">
+    return <form className="main-form" onSubmit={handleSubmit}>
         <Input
             type="text"
             value={myState.taskContent}
@@ -64,9 +70,10 @@ export function Form(){
             func={(e)=>handleChange("dueDate", e.target.value)}
         />
         <Button
-            // onClick={handleSubmit}
+
             className="formButton"
             text="Send ToDO"
+            type="submit"
         />
     </form>
 }
