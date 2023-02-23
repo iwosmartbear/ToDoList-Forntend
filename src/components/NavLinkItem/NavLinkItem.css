@@ -1,0 +1,11 @@
+.mainNav {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    background-color: #4b4bd5;
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+    border-radius: 2rem;
+    cursor: grabbing;
+}
