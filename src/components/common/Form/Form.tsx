@@ -62,8 +62,7 @@ export function Form() {
         />
         <MySelect
             text="Choose priority"
-            value="choose priority"
-            name="mainSelectPriority"
+
             className="mainSelectPriority"
             options={prioritiesArray}
             func={(e) => handleChange("priority", e.target.value)}
@@ -77,7 +76,6 @@ export function Form() {
             func={(e) => handleChange("dueDate", e.target.value)}
         />
         <Button
-
             className="formButton"
             text="Send ToDO"
             type="submit"

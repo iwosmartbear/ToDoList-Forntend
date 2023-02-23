@@ -11,11 +11,15 @@ export const ToDoItem=({ ownerId, dueDate, isOpen, taskContent, priority, catego
         <div className="category">{category}</div>
         <div className="priority">{priorityToString(priority)}</div>
         <div className="dueDate">{dueDate as string}</div>
-        {/*<div className="isOpen">{isOpen}</div>*/}
         <Button
             text={isOpen ? "Close" : "Reopen"}
             type={"submit"}
             className={isOpen ? "button__opened" : "button__closed"}
+        ></Button>
+        <Button
+            text="delete"
+            type="button"
+            className="delete"
         ></Button>
     </div>
 }
