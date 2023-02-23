@@ -1,4 +1,8 @@
 .header{
+    position: relative;
     text-align: center;
-    width: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-rows: 4.5rem 5.5rem;
+    grid-template-columns: repeat(12, 1fr);
 }

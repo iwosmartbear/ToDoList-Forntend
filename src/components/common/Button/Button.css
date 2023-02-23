@@ -1,6 +1,6 @@
 Button{
     min-height: 10%;
-    margin: 0.1rem 2vw;
+    margin: 0.1rem;
     background-color: #5a5656;
     opacity: 0.9;
     color: white;
@@ -10,4 +10,5 @@ Button{
     box-shadow: 0 0 1vh black;
     cursor: auto;
     transition: opacity 0.5s;
+    width: 90%;
 }
