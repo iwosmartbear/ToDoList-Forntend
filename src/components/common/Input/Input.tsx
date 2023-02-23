@@ -17,7 +17,7 @@ interface props {
 }
 export function Input({type, text, value, name, className, disabled, func, min, max, minLength, maxLength}: props){
 
-    return <label>{text}<br/>
+    return <label className={`${className}__label`}>{text}<br/>
         <input
             type={type}
             value={value}
