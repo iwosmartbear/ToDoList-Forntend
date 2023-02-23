@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Header} from "./components/Header/Header";
-import {ToDoObject} from "./types/fetchTypes";
+import {ToDoDTO, ToDoObject} from "./types/fetchTypes";
 import {fetchToAPI} from "./utils/functions";
 
 import './App.css';
+import {Route, Routes} from "react-router-dom";
+import {MainView} from "./components/MainView/MainView";
+import {Calendar} from "./components/Calendar/Calendar";
 
 function App() {
     const [listOfToDos, setListOfToDos]= useState<Promise<ToDoObject>| Promise<ToDoObject[]> | ToDoObject[] | ToDoObject>([]);
@@ -23,9 +26,12 @@ function App() {
 
   return (
     <div className="App">
-            {[listOfToDos].length === 0 ?
-                <p>Nothing to show!</p> :
-                <Header/>}
+        <Header/>
+        <Routes>
+            <Route path='/all' element={<MainView listOfToDos={listOfToDos as ToDoDTO[]}/>}/>
+            <Route path='/calendar' element={<Calendar listOfToDos={listOfToDos as ToDoDTO[]}/>}/>
+        </Routes>
+
 
     </div>
   );
