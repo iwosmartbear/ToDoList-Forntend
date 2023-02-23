@@ -1,6 +1,5 @@
 Button{
     min-height: 10%;
-    /*margin: 0.1rem;*/
     background-color: #5a5656;
     opacity: 0.9;
     color: white;
@@ -16,4 +15,14 @@ Button{
     grid-area: 1/11/2/13;
     margin-top: 1rem;
     padding: .5rem;
+}
+.button__opened{
+    background-color: #5a5656;
+    color: white;
+    text-shadow: 0 0 1vh black;
+}
+.button__closed{
+    background-color: #ccc;
+    color: black;
+    text-shadow: 0 0 1vh white;
 }

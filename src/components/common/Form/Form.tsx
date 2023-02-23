@@ -1,11 +1,14 @@
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
 import {FormEvent, useState} from "react";
-
-import './Form.css'
 import {ToDoDTO} from "../../../types/fetchTypes";
 import {clearToDoObject} from "../../../utils/variables";
 import {changeDateFormat, fetchToAPI} from "../../../utils/functions";
+import {prioritiesArray, stringToPriority} from "../../../utils/styleFunctions";
+import {MySelect} from "../Select/Select";
+
+
+import './Form.css'
 
 
 export function Form() {
@@ -14,7 +17,7 @@ export function Form() {
     function handleChange(nameOfValue: string, val: string) {
         setToDo({
             ...toDo,
-            [`${nameOfValue}`]: val,
+            [`${nameOfValue}`]: nameOfValue === "priority" ? stringToPriority(val) : val,
         })
     }
 
@@ -57,14 +60,12 @@ export function Form() {
             maxLength={25}
             func={(e) => handleChange("category", e.target.value)}
         />
-        <Input
-            type="number"
-            value={toDo.priority}
-            text="Priority: "
-            name="mainInputPriority"
-            className="mainInputPriority"
-            min={1}
-            max={5}
+        <MySelect
+            text="Choose priority"
+            value="choose priority"
+            name="mainSelectPriority"
+            className="mainSelectPriority"
+            options={prioritiesArray}
             func={(e) => handleChange("priority", e.target.value)}
         />
         <Input
