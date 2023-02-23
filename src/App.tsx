@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import {Header} from "./components/Header/Header";
 import {ToDoObject} from "./types/fetchTypes";
 import {fetchToAPI} from "./utils/functions";
+
+import './App.css';
 
 function App() {
     const [listOfToDos, setListOfToDos]= useState<Promise<ToDoObject>| Promise<ToDoObject[]> | ToDoObject[] | ToDoObject>([]);
