@@ -29,3 +29,18 @@
 .toDo__closed{
     background-color: #6b6767;
 }
+.very-low{
+    background-color: greenyellow;
+}
+.low{
+    background-color: green;
+}
+.medium{
+    background-color: blue;
+}
+.high{
+    background-color: #7d22c9;
+}
+.very-high{
+    background-color: red;
+}

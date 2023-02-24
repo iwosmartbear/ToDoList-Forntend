@@ -15,3 +15,12 @@ export const stringToPriority= (stringFromInput: string): number | string=>{
     if(stringFromInput === "It BURNS!!!!") return 5;
     return "Do not cheat!";
 }
+export const priorityToClassChecker=(priorityNumber: number): string=>{
+    if(priorityNumber === 1) return " very-low";
+    if(priorityNumber === 2) return " low";
+    if(priorityNumber === 3) return " medium";
+    if(priorityNumber === 4) return " high";
+    if(priorityNumber === 5) return " very-high";
+    return "";
+}
+

@@ -2,11 +2,9 @@ import {ToDoDTO} from "../../types/fetchTypes";
 
 import './ToDoItem.css'
 import {Button} from "../common/Button/Button";
-import {priorityToString} from "../../utils/styleFunctions";
-interface props extends ToDoDTO{}
-
-export const ToDoItem=({ ownerId, dueDate, isOpen, taskContent, priority, category }: props)=>{
-    return<div className={`ToDoItem${isOpen ? " toDo__opened" : " toDo__closed"}`}>
+import {priorityToClassChecker, priorityToString} from "../../utils/styleFunctions";
+export const ToDoItem = ({dueDate, isOpen, taskContent, priority, category}: ToDoDTO) => {
+    return <div className={`ToDoItem${isOpen ? " toDo__opened" : " toDo__closed"} ${priorityToClassChecker(priority)}`}>
         <div className="taskContent">{taskContent}</div>
         <div className="category">{category}</div>
         <div className="priority">{priorityToString(priority)}</div>

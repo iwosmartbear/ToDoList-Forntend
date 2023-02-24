@@ -14,5 +14,5 @@ export interface ToDoDTO {
 export interface ToDoObject extends ToDoDTO{
     id: string;
     createdAt: Date;
-    closedAt: Date;
+    closedAt?: Date;
 }

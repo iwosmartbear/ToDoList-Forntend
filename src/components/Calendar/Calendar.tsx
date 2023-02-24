@@ -1,16 +1,21 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ToDoDTO} from "../../types/fetchTypes";
+import {ToDoListContext} from "../../context/ToDoListContextProvider";
 
-interface props {
-    listOfToDos: ToDoDTO[];
-}
+export const Calendar=()=>{
+    const {listOfToDos} = useContext(ToDoListContext);
+    const [showCalendar, setShowCalendar] = useState(false)
 
-export const Calendar=({listOfToDos}: props)=>{
+    useEffect(()=>{
+        if (listOfToDos){
+            setShowCalendar(true)
+        }
+    },[listOfToDos])
 
     return <div className="calendar">
         <h1>CalendarView</h1>
-        {[listOfToDos].length === 0 ?
-            <p>Nothing to show!</p> :
-            (listOfToDos as ToDoDTO[]).map(el=><p key={(Math.random()*10000)}>task content: {el.taskContent}; task: category: {el.category}; task due date: {el.dueDate as string}</p>)}
-    </div>
+        {showCalendar ?
+            (listOfToDos as ToDoDTO[]).map(el=><p key={(Math.random()*10000)}>task content: {el.taskContent}; task: category: {el.category}; task due date: {el.dueDate as string}</p>):
+            <p>no Calendar</p>
+        }</div>
 }
