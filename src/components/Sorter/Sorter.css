@@ -1,0 +1,22 @@
+.sorter{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 1rem;
+    width: 90%;
+    margin: 1rem auto;
+}
+.sort{
+    height: 2rem;
+}
+.sorting-a-z{
+    grid-area: 1/1/2/6;
+}
+.sorting-priority{
+    grid-area: 1/8/2/9;
+}
+.sorting-category{
+    grid-area: 1/6/2/8;
+}
+.sorting-dueDate{
+    grid-area: 1/9/2/11;
+}

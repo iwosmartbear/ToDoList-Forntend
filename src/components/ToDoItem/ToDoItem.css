@@ -20,7 +20,7 @@
     grid-area: 1/9/2/11;
 }
 .category{
-    text-align: center;
+    /*text-align: center;*/
     grid-area: 1/6/2/8;
 }
 .toDo__opened{
