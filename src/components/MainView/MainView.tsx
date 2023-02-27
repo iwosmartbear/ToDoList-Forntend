@@ -19,8 +19,8 @@ export const MainView=()=>{
         <Sorter></Sorter>
         {!showMainView ?
             <p>Nothing to show!</p> :
-            (listOfToDos as ToDoDTO[]).map((el, index)=><ToDoItem
-                key={index}
+            (listOfToDos as ToDoDTO[]).map(el=><ToDoItem
+                key={el.id}
                 id={el.id}
                 ownerId={el.ownerId}
                 taskContent={el.taskContent}
@@ -31,8 +31,4 @@ export const MainView=()=>{
             />)
         }
     </div>
-}
-
-function updateToDoListInContext() {
-    throw new Error("Function not implemented.");
 }

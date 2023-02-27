@@ -52,6 +52,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
+            console.log("before update")
             return {
                 ...prevData,
                 listOfToDos: data,

@@ -33,7 +33,7 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
         try {
             const response = fetchToAPI("DELETE", '/delete',  toDo)
                 .then(e=> updateToDoListInContext());
-
+            console.log("afterupdate")
 
         } catch (e) {
             console.error(e);
@@ -47,7 +47,7 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
         <div className="dueDate">{dueDate as string}</div>
         <Button
             text={isOpen ? "Close" : "Reopen"}
-            type={"button"}
+            type="button"
             className={isOpen ? "button__opened" : "button__closed"}
             func={handleClose}
         ></Button>
