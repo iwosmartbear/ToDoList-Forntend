@@ -10,10 +10,9 @@ export const MainView=()=>{
 
     useEffect(()=>{
         if (listOfToDos){
-            setShowMainView(true)
+            setShowMainView(true);
         }
     },[listOfToDos])
-
 
     return <div className="mainView">
         <h1>MainView</h1>
@@ -22,6 +21,7 @@ export const MainView=()=>{
             <p>Nothing to show!</p> :
             (listOfToDos as ToDoDTO[]).map((el, index)=><ToDoItem
                 key={index}
+                id={el.id}
                 ownerId={el.ownerId}
                 taskContent={el.taskContent}
                 category={el.category}
@@ -31,4 +31,8 @@ export const MainView=()=>{
             />)
         }
     </div>
+}
+
+function updateToDoListInContext() {
+    throw new Error("Function not implemented.");
 }

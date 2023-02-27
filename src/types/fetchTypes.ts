@@ -3,6 +3,7 @@ export interface headerAndBodyObject {
 }
 
 export interface ToDoDTO {
+    id: string;
     ownerId: string;
     taskContent: string;
     category: string;
@@ -12,7 +13,6 @@ export interface ToDoDTO {
 }
 
 export interface ToDoObject extends ToDoDTO{
-    id: string;
     createdAt: Date;
     closedAt?: Date;
 }

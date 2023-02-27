@@ -23,12 +23,6 @@
     /*text-align: center;*/
     grid-area: 1/6/2/8;
 }
-.toDo__opened{
-    background-color: red;
-}
-.toDo__closed{
-    background-color: #6b6767;
-}
 .very-low{
     background-color: greenyellow;
 }
@@ -43,4 +37,7 @@
 }
 .very-high{
     background-color: red;
+}
+.toDo__closed{
+    background-color: #6b6767;
 }

@@ -10,7 +10,17 @@ export const fetchToAPI = async (method: 'GET' | 'POST' | 'PUT' | 'DELETE', path
         return data;
     } catch (err) {
         console.error(err)
-        return err ? (err as Error).message : null;
+        return [{
+            ownerId: "",
+            taskContent: err ? (err as Error).message : "Unknown Error",
+            category: "Error",
+            priority: 5,
+            isOpen: 1,
+            dueDate: new Date().toDateString(),
+        }] as ToDoObject[];
+
+        //@TODO have to change it for sure, I'll create message box to show errors and messages
+        // return err ? (err as Error).message : null;
     }
 }
 const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): headerAndBodyObject => {
