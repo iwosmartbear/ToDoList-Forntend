@@ -1,6 +1,6 @@
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
-import {FormEvent, useState} from "react";
+import {FormEvent, useContext, useState} from "react";
 import {ToDoDTO} from "../../../types/fetchTypes";
 import {clearToDoObject} from "../../../utils/variables";
 import {changeDateFormat, fetchToAPI} from "../../../utils/functions";
@@ -9,9 +9,11 @@ import {MySelect} from "../Select/Select";
 
 
 import './Form.css'
+import {ToDoListContext} from "../../../context/ToDoListContextProvider";
 
 
 export function Form() {
+    const { updateToDoListInContext} = useContext(ToDoListContext);
     const [toDo, setToDo] = useState<ToDoDTO>(clearToDoObject);
 
     function handleChange(nameOfValue: string, val: string) {
@@ -31,9 +33,9 @@ export function Form() {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const response = fetchToAPI("POST", '/add', toDo);
-
+            const response = fetchToAPI("POST", '/add', toDo).then(e=> updateToDoListInContext());
             clearState();
+
         } catch (e) {
             console.error(e);
         }
