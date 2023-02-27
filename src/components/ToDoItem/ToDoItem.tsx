@@ -33,7 +33,6 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
         try {
             const response = fetchToAPI("DELETE", '/delete',  toDo)
                 .then(e=> updateToDoListInContext());
-            console.log("afterupdate")
 
         } catch (e) {
             console.error(e);

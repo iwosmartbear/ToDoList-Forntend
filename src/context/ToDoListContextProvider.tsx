@@ -1,16 +1,24 @@
 import React, {createContext, useEffect, useState} from "react";
 import {ToDoObject} from "../types/fetchTypes";
 import {fetchToAPI} from "../utils/functions";
+import {SortBy, sortFunction} from "../utils/sortFunctions";
 
 export interface ContextInterFace {
     listOfToDos?: ToDoObject | ToDoObject[] | Promise<ToDoObject> | Promise<ToDoObject[]>;
     editedToDo?: ToDoObject;
-    sortingStyle?: "priority" | "category" | "dueDate" | "taskContent";
+    sortBy?: SortBy;
+    direction?: boolean;
     updateToDoListInContext: ()=>void;
+    setSortBy: (sortBy: SortBy)=>void;
+    setDirection: (direction?: boolean)=>void;
+    sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean)=>void;
 }
 
 export const ToDoListContext = createContext<ContextInterFace>({
     updateToDoListInContext: ()=>{},
+    setSortBy: ()=>{},
+    setDirection: ()=>{},
+    sortListOfToDos: ()=>{},
 });
 
 type Props = {
@@ -21,8 +29,12 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
     const [toDoListContext, setToDoListContext] = useState<ContextInterFace>({
         listOfToDos: undefined,
         editedToDo: undefined,
-        sortingStyle: "priority",
+        sortBy: "priority",
+        direction: true,
         updateToDoListInContext: updateToDoListInContext,
+        setSortBy: setSortBy,
+        setDirection: setDirection,
+        sortListOfToDos: sortListOfToDos,
     });
 
     useEffect(() => {
@@ -52,15 +64,40 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
-            console.log("before update")
             return {
                 ...prevData,
                 listOfToDos: data,
             }
         }));
     }
+    function setSortBy(sortBy: SortBy){
+        setToDoListContext((prevData: ContextInterFace)=> {
+            return {
+                ...prevData,
+                sortBy,
+            }
+        });
+    }
+    function setDirection(direction?: boolean){
 
+        setToDoListContext((prevData: ContextInterFace)=> {
+            return {
+                ...prevData,
+                direction,
+            }
+        });
+    }
 
+    function sortListOfToDos(sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean){
+        const sortedList = sortFunction(sortBy, listOfToDos, direction);
+
+        setToDoListContext((prevData: ContextInterFace)=> {
+            return {
+                ...prevData,
+                listOfToDos: sortedList,
+            }
+        });
+    }
     return (
         <ToDoListContext.Provider value={toDoListContext}>
             {children}
