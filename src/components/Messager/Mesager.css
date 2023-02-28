@@ -4,6 +4,7 @@
     top: 2rem;
     min-height: 30vh;
     min-width: 30vw;
+    height: auto;
     border: 1px solid black;
     box-shadow: 0 0 1vh black;
     border-radius: 2rem;
@@ -18,7 +19,7 @@
     width: 100%;
     margin-top: 2rem;
     font-size: 1.2rem;
-    height: 18vh;
+    /*height: 18vh;*/
     line-height: 3rem;
 }
 

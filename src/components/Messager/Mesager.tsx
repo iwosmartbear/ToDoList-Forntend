@@ -2,6 +2,7 @@ import {MouseEventHandler} from "react";
 
 import {Button} from "../common/Button/Button";
 import {ToDoObject} from "../../types/fetchTypes";
+import {ToDoInMessanger} from "../ToDoInMessanger/ToDoInMessanger";
 
 import './Mesager.css'
 
@@ -26,8 +27,11 @@ export const Messager = ({text, isButton, type, func, isInMiddle, message, tempT
                 <h1>{text}</h1>
                 {message && (message as string[]).length !== 0 && message[0] !== "" && <p>Message: {message}</p>}
 
-                {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && tempToDosList.map(el => <p key={el.id}
-                                                                                                             className={el.isOpen ? "" : " toDo__closed"}>{el.taskContent}</p>)}
+                {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && tempToDosList.map(el =>
+                    <ToDoInMessanger key={el.id}
+                                     taskContent={el.taskContent}
+                                     priority={el.priority}
+                                     isOpen={el.isOpen}/>)}
 
             </div>
             {isButton && <Button text='Load Again' type={type} className="message__button" func={func}/>}
