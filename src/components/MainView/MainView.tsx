@@ -3,22 +3,46 @@ import {ToDoDTO} from "../../types/fetchTypes";
 import {ToDoItem} from "../ToDoItem/ToDoItem";
 import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Sorter} from "../Sorter/Sorter";
+import { Messager } from "../Messager/Mesager";
+import {useNavigate} from "react-router-dom";
 
 export const MainView=()=>{
-    const {listOfToDos} = useContext(ToDoListContext);
-    const [showMainView, setShowMainView] = useState(false)
+    const {listOfToDos, isMessage, message, resetError} = useContext(ToDoListContext);
+    const [showMainView, setShowMainView] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if (listOfToDos){
             setShowMainView(true);
         }
+        resetError();
     },[listOfToDos])
+
+    function navigateTo(): void{
+        navigate('/calendar');
+    }
 
     return <div className="mainView">
         <h1>MainView</h1>
+        {isMessage && <Messager
+            text="Loading..."
+            isButton={true}
+            type="button"
+            className="message__content"
+            isInMiddle={true}
+            message={message}
+            func={navigateTo}
+        />}
         <Sorter></Sorter>
         {!showMainView ?
-            <p>Nothing to show!</p> :
+            <div>
+                {isMessage || <Messager
+                text="Loading..."
+                isButton={false}
+                className="message__content"
+                message="waiting for data"
+            />}
+            </div>:
             (listOfToDos as ToDoDTO[]).map(el=><ToDoItem
                 key={el.id}
                 id={el.id}

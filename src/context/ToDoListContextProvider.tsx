@@ -8,17 +8,25 @@ export interface ContextInterFace {
     editedToDo?: ToDoObject;
     sortBy?: SortBy;
     direction?: boolean;
+    isMessage: boolean;
+    message?: string;
     updateToDoListInContext: ()=>void;
     setSortBy: (sortBy: SortBy)=>void;
     setDirection: (direction?: boolean)=>void;
     sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean)=>void;
+    setErrorMessage: (err: Error)=>void;
+    resetError: ()=>void;
+
 }
 
 export const ToDoListContext = createContext<ContextInterFace>({
+    isMessage: false,
     updateToDoListInContext: ()=>{},
     setSortBy: ()=>{},
     setDirection: ()=>{},
     sortListOfToDos: ()=>{},
+    setErrorMessage: ()=>{},
+    resetError: ()=>{},
 });
 
 type Props = {
@@ -29,26 +37,32 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
     const [toDoListContext, setToDoListContext] = useState<ContextInterFace>({
         listOfToDos: undefined,
         editedToDo: undefined,
+        isMessage: false,
+        message: "",
         sortBy: "priority",
         direction: true,
-        updateToDoListInContext: updateToDoListInContext,
-        setSortBy: setSortBy,
-        setDirection: setDirection,
-        sortListOfToDos: sortListOfToDos,
+        updateToDoListInContext,
+        setSortBy,
+        setDirection,
+        sortListOfToDos,
+        setErrorMessage,
+        resetError,
     });
 
     useEffect(() => {
         const doFetch = async () => {
             try {
                 const data = await fetchToAPI("GET", '/all') as ToDoObject[];
+                resetError()
                 return data;
-            } catch (e) {
-                throw new Error('Messed Up')
+            } catch (err) {
+                setErrorMessage(err as Error);
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
             return {
                 ...prevData,
+                isMessage: data ? false : true,
                 listOfToDos: data,
             }
         }));
@@ -59,13 +73,14 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             try {
                 const data = await fetchToAPI("GET", '/all') as ToDoObject[];
                 return data;
-            } catch (e) {
-                throw new Error('Messed Up')
+            } catch (err) {
+                setErrorMessage(err as Error);
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
             return {
                 ...prevData,
+                isMessage: data ? true : false,
                 listOfToDos: data,
             }
         }));
@@ -78,8 +93,25 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             }
         });
     }
+    function setErrorMessage(err: Error){
+        setToDoListContext((prevData: ContextInterFace)=> {
+            return {
+                ...prevData,
+                isMessage: (err as Error).message ? true : false,
+                message: (err as Error).message ? (err as Error).message : "Something went wrong",
+            }
+        })
+    }
+    function resetError(){
+        setToDoListContext((prevData: ContextInterFace)=> {
+            return {
+                ...prevData,
+                isMessage: false,
+                message: "",
+            }
+        })
+    }
     function setDirection(direction?: boolean){
-
         setToDoListContext((prevData: ContextInterFace)=> {
             return {
                 ...prevData,

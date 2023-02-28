@@ -9,34 +9,30 @@ import {ToDoListContext} from "../../context/ToDoListContextProvider";
 
 
 export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, ownerId}: ToDoDTO) => {
-    const { updateToDoListInContext} = useContext(ToDoListContext);
+    const {updateToDoListInContext, setErrorMessage} = useContext(ToDoListContext);
     const [toDo, setToDo] = useState({
         id,
         dueDate,
         ownerId,
-        isOpen: isOpen ===1 ? 0 : 1,
+        isOpen: isOpen === 1 ? 0 : 1,
         taskContent,
         priority,
-        category} as ToDoDTO);
+        category
+    } as ToDoDTO);
+
     function handleClose() {
-        try {
-            const response = fetchToAPI("PUT", '/edit',  toDo)
-        .then(e=> updateToDoListInContext());
+
+        const response = fetchToAPI("PUT", '/edit', {...toDo, isOpen: isOpen === 1 ? 0 : 1})
+            .then(e => updateToDoListInContext())
+            .catch(err => setErrorMessage(err as Error));
 
 
-        } catch (e) {
-            console.error(e);
-        }
     }
 
-    function deleteElement(){
-        try {
-            const response = fetchToAPI("DELETE", '/delete',  toDo)
-                .then(e=> updateToDoListInContext());
-
-        } catch (e) {
-            console.error(e);
-        }
+    function deleteElement() {
+        const response = fetchToAPI("DELETE", '/delete', toDo)
+            .then(data => updateToDoListInContext())
+            .catch(err => setErrorMessage(err as Error));
     }
 
     return <div className={`ToDoItem${isOpen ? "" : " toDo__closed"} ${priorityToClassChecker(priority)}`}>

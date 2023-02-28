@@ -7,20 +7,12 @@ export const fetchToAPI = async (method: 'GET' | 'POST' | 'PUT' | 'DELETE', path
     try {
         const response = await fetch(`${hostUrl}${path}`, createHeaderAndBodyObject(method, toDoToChange));
         const data = await response.json();
+        if (data.length === 0){
+            throw new Error("There is no data to show.")
+        }
         return data;
     } catch (err) {
-        console.error(err)
-        return [{
-            ownerId: "",
-            taskContent: err ? (err as Error).message : "Unknown Error",
-            category: "Error",
-            priority: 5,
-            isOpen: 1,
-            dueDate: new Date().toDateString(),
-        }] as ToDoObject[];
-
-        //@TODO have to change it for sure, I'll create message box to show errors and messages
-        // return err ? (err as Error).message : null;
+        throw new Error((err as Error).message ? (err as Error).message : "Unknown Error")
     }
 }
 const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): headerAndBodyObject => {
