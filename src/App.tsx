@@ -1,12 +1,12 @@
 import React from 'react';
-import {Header} from "./components/Header/Header";
-
-import './App.css';
 import {Route, Routes} from "react-router-dom";
+
+import {Header} from "./components/Header/Header";
 import {MainView} from "./components/MainView/MainView";
-import {Calendar} from "./components/Calendar/Calendar";
+import {CalendarView} from "./components/CalendarView/CalendarView";
 import {ToDoListContextProvider} from "./context/ToDoListContextProvider";
 
+import './App.css';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path='/' element={<MainView/>}/>
-                    <Route path='/calendar' element={<Calendar/>}/>
+                    <Route path='/calendar' element={<CalendarView/>}/>
                 </Routes>
             </div>
         </ToDoListContextProvider>

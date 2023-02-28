@@ -1,5 +1,6 @@
 import {config} from "../config/config";
 import {headerAndBodyObject, ToDoDTO, ToDoObject} from "../types/fetchTypes";
+import moment from "moment";
 
 
 export const fetchToAPI = async (method: 'GET' | 'POST' | 'PUT' | 'DELETE', path: string, toDoToChange?: ToDoDTO): Promise<ToDoObject | ToDoObject[] | string | null> => {
@@ -7,7 +8,7 @@ export const fetchToAPI = async (method: 'GET' | 'POST' | 'PUT' | 'DELETE', path
     try {
         const response = await fetch(`${hostUrl}${path}`, createHeaderAndBodyObject(method, toDoToChange));
         const data = await response.json();
-        if (data.length === 0){
+        if (data.length === 0) {
             throw new Error("There is no data to show.")
         }
         return data;
@@ -38,5 +39,5 @@ const createHeaderAndBodyObject = (method: string, toDoToChange?: ToDoDTO): head
 }
 
 export const changeDateFormat = (date: Date) => {
-    return date.toISOString().slice(0, 10);
+    return moment(date).format('YYYY-MM-DD');
 }

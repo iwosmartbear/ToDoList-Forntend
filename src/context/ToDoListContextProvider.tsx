@@ -9,24 +9,33 @@ export interface ContextInterFace {
     sortBy?: SortBy;
     direction?: boolean;
     isMessage: boolean;
-    message?: string;
-    updateToDoListInContext: ()=>void;
-    setSortBy: (sortBy: SortBy)=>void;
-    setDirection: (direction?: boolean)=>void;
-    sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean)=>void;
-    setErrorMessage: (err: Error)=>void;
-    resetError: ()=>void;
+    message?: (string | ToDoObject)[];
+    updateToDoListInContext: () => void;
+    setSortBy: (sortBy: SortBy) => void;
+    setDirection: (direction?: boolean) => void;
+    sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean) => void;
+    setErrorMessage: (err: Error) => void;
+    resetError: () => void;
+    setIsMessage: (isMessage: boolean) => void;
 
 }
 
 export const ToDoListContext = createContext<ContextInterFace>({
     isMessage: false,
-    updateToDoListInContext: ()=>{},
-    setSortBy: ()=>{},
-    setDirection: ()=>{},
-    sortListOfToDos: ()=>{},
-    setErrorMessage: ()=>{},
-    resetError: ()=>{},
+    updateToDoListInContext: () => {
+    },
+    setSortBy: () => {
+    },
+    setDirection: () => {
+    },
+    sortListOfToDos: () => {
+    },
+    setErrorMessage: () => {
+    },
+    resetError: () => {
+    },
+    setIsMessage: () => {
+    },
 });
 
 type Props = {
@@ -38,7 +47,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
         listOfToDos: undefined,
         editedToDo: undefined,
         isMessage: false,
-        message: "",
+        message: [],
         sortBy: "priority",
         direction: true,
         updateToDoListInContext,
@@ -47,6 +56,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
         sortListOfToDos,
         setErrorMessage,
         resetError,
+        setIsMessage,
     });
 
     useEffect(() => {
@@ -59,16 +69,16 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
                 setErrorMessage(err as Error);
             }
         }
-        doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
+        doFetch().then(data => setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
-                isMessage: data ? false : true,
+                isMessage: !data,
                 listOfToDos: data,
             }
         }));
     }, []);
 
-    async function updateToDoListInContext(){
+    async function updateToDoListInContext() {
         const doFetch = async () => {
             try {
                 const data = await fetchToAPI("GET", '/all') as ToDoObject[];
@@ -77,42 +87,55 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
                 setErrorMessage(err as Error);
             }
         }
-        doFetch().then(data => setToDoListContext((prevData: ContextInterFace)=> {
+        doFetch().then(data => setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
-                isMessage: data ? true : false,
+                isMessage: !!data,
                 listOfToDos: data,
             }
         }));
     }
-    function setSortBy(sortBy: SortBy){
-        setToDoListContext((prevData: ContextInterFace)=> {
+
+    function setSortBy(sortBy: SortBy) {
+        setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
                 sortBy,
             }
         });
     }
-    function setErrorMessage(err: Error){
-        setToDoListContext((prevData: ContextInterFace)=> {
+
+    function setErrorMessage(err?: Error) {
+        setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
-                isMessage: (err as Error).message ? true : false,
-                message: (err as Error).message ? (err as Error).message : "Something went wrong",
+                isMessage: !!(err as Error).message,
+                message: (err as Error).message ? [(err as Error).message] : ["Something went wrong"],
             }
         })
     }
-    function resetError(){
-        setToDoListContext((prevData: ContextInterFace)=> {
+
+    function resetError() {
+        setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
                 isMessage: false,
-                message: "",
+                message: [],
             }
         })
     }
-    function setDirection(direction?: boolean){
-        setToDoListContext((prevData: ContextInterFace)=> {
+
+    function setIsMessage(isMessage: boolean) {
+        setToDoListContext((prevData: ContextInterFace) => {
+            return {
+                ...prevData,
+                isMessage: isMessage,
+            }
+        })
+    }
+
+    function setDirection(direction?: boolean) {
+        setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
                 direction,
@@ -120,16 +143,17 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
         });
     }
 
-    function sortListOfToDos(sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean){
+    function sortListOfToDos(sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean) {
         const sortedList = sortFunction(sortBy, listOfToDos, direction);
 
-        setToDoListContext((prevData: ContextInterFace)=> {
+        setToDoListContext((prevData: ContextInterFace) => {
             return {
                 ...prevData,
                 listOfToDos: sortedList,
             }
         });
     }
+
     return (
         <ToDoListContext.Provider value={toDoListContext}>
             {children}

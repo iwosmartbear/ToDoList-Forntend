@@ -9,7 +9,7 @@ export const Navigation = ()=>{
 
     return <div className="nav">
         <NavLinkItem to={"/"} className="mainNav" text="Home" />
-        <NavLinkItem to={"/calendar"} className="mainNav" text="Calendar" />
+        <NavLinkItem to={"/calendar"} className="mainNav" text="CalendarView" />
     </div>
 
 }
