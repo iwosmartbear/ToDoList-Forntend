@@ -6,10 +6,10 @@ import {clearToDoObject} from "../../../utils/variables";
 import {changeDateFormat, fetchToAPI} from "../../../utils/functions";
 import {prioritiesArray, stringToPriority} from "../../../utils/styleFunctions";
 import {MySelect} from "../Select/Select";
+import {ToDoListContext} from "../../../context/ToDoListContextProvider";
 
 
 import './Form.css'
-import {ToDoListContext} from "../../../context/ToDoListContextProvider";
 
 
 export function Form() {

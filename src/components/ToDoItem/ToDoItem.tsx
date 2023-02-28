@@ -2,10 +2,11 @@ import {ToDoDTO} from "../../types/fetchTypes";
 
 import './ToDoItem.css'
 import {Button} from "../common/Button/Button";
-import {priorityToClassChecker, priorityToString} from "../../utils/styleFunctions";
+import {priorityToClassChecker, priorityToString, stringToPriority} from "../../utils/styleFunctions";
 import {fetchToAPI} from "../../utils/functions";
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {ToDoListContext} from "../../context/ToDoListContextProvider";
+import {Input} from "../common/Input/Input";
 
 
 export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, ownerId}: ToDoDTO) => {
@@ -14,7 +15,7 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
         id,
         dueDate,
         ownerId,
-        isOpen: isOpen === 1 ? 0 : 1,
+        isOpen,
         taskContent,
         priority,
         category
@@ -34,9 +35,28 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
             .then(data => updateToDoListInContext())
             .catch(err => setErrorMessage(err as Error));
     }
-
+    function finishEditing() {
+        const response = fetchToAPI("PUT", '/edit', toDo)
+            .then(e => updateToDoListInContext())
+            .catch(err => setErrorMessage(err as Error));
+    }
+    function handleChange(nameOfValue: string, val: string) {
+        setToDo({
+            ...toDo,
+            [`${nameOfValue}`]: nameOfValue === "priority" ? stringToPriority(val) : val,
+        })
+    }
     return <div className={`ToDoItem${isOpen ? "" : " toDo__closed"} ${priorityToClassChecker(priority)}`}>
-        <div className="taskContent">{taskContent}</div>
+        <Input
+            type="text"
+            value={toDo.taskContent}
+            name="mainInput"
+            className={`taskContent`}
+            minLength={3}
+            maxLength={200}
+            func={(e) => handleChange("taskContent", e.target.value)}
+            funcTwo={()=>finishEditing()}
+        />
         <div className="category">{category}</div>
         <div className="priority">{priorityToString(priority)}</div>
         <div className="dueDate">{dueDate as string}</div>
