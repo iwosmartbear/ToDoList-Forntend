@@ -1,4 +1,4 @@
-Button{
+Button {
     min-height: 10%;
     background-color: #5a5656;
     opacity: 0.9;
@@ -11,23 +11,27 @@ Button{
     transition: opacity 0.5s;
     width: 90%;
 }
-.formButton{
+
+.formButton {
     grid-area: 1/11/2/13;
     margin-top: 1rem;
     padding: .5rem;
 }
-.button__opened{
+
+.button__opened {
     background-color: #5a5656;
     color: white;
     text-shadow: 0 0 1vh black;
     width: 40%;
 }
-.button__closed{
+
+.button__closed {
     background-color: #ccc;
     color: black;
     text-shadow: 0 0 1vh white;
     width: 40%;
 }
-.delete{
+
+.delete {
     width: 40%;
 }

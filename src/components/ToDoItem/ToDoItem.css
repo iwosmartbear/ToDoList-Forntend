@@ -1,4 +1,4 @@
-.ToDoItem{
+.ToDoItem {
     width: 90%;
     height: 3rem;
     border: 1px solid black;
@@ -10,34 +10,44 @@
     grid-column-gap: 1rem;
     margin-bottom: .3rem;
 }
-.taskContent{
+
+.taskContent {
     grid-area: 1/1/2/6;
 }
-.priority{
+
+.priority {
     grid-area: 1/8/2/9;
 }
-.dueDate{
+
+.dueDate {
     grid-area: 1/9/2/11;
 }
-.category{
+
+.category {
     /*text-align: center;*/
     grid-area: 1/6/2/8;
 }
-.very-low{
+
+.very-low {
     background-color: greenyellow;
 }
-.low{
+
+.low {
     background-color: green;
 }
-.medium{
+
+.medium {
     background-color: blue;
 }
-.high{
+
+.high {
     background-color: #7d22c9;
 }
-.very-high{
+
+.very-high {
     background-color: red;
 }
-.toDo__closed{
+
+.toDo__closed {
     background-color: #6b6767;
 }

@@ -13,7 +13,7 @@ import {ToDoListContext} from "../../../context/ToDoListContextProvider";
 
 
 export function Form() {
-    const { updateToDoListInContext} = useContext(ToDoListContext);
+    const {updateToDoListInContext} = useContext(ToDoListContext);
     const [toDo, setToDo] = useState<ToDoDTO>(clearToDoObject);
 
     function handleChange(nameOfValue: string, val: string) {
@@ -33,7 +33,7 @@ export function Form() {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const response = fetchToAPI("POST", '/add', toDo).then(e=> updateToDoListInContext());
+            const response = fetchToAPI("POST", '/add', toDo).then(e => updateToDoListInContext());
             clearState();
 
         } catch (e) {

@@ -1,10 +1,11 @@
-label{
+label {
     margin: 0;
     padding: 0 1rem;
     width: 100%;
     text-align: center;
 }
-input{
+
+input {
     border-radius: 15px;
     padding: .5rem 0;
     text-align: center;
@@ -12,21 +13,25 @@ input{
     font-size: 1rem;
     height: 1.1rem;
 }
-.mainInput__label{
+
+.mainInput__label {
     grid-area: 1/1/2/6;
 }
 
-.mainInputDate__label{
+.mainInputDate__label {
     grid-area: 1/9/2/11;
 }
-.mainInputPriority{
+
+.mainInputPriority {
 }
+
 /*.mainInputPriority__label{*/
 /*    grid-area: 1/8/2/9;*/
 /*}*/
-.mainInputCategory__label{
-        grid-area: 1/6/2/8;
+.mainInputCategory__label {
+    grid-area: 1/6/2/8;
 }
+
 /*input[type=number]::-webkit-inner-spin-button {*/
 /*    -webkit-appearance: none;*/
 /*}*/
