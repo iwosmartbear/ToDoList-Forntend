@@ -16,6 +16,9 @@ export const Header = () => {
         navigate(`${window.location.pathname === '/' ? '/calendar' : '/'}`);
     }
 
+    function reload(): void {
+        window.location.reload();
+    }
     return <div className="header">
         {isMessage && <Messager
             text="Loading..."
@@ -25,6 +28,7 @@ export const Header = () => {
             isInMiddle={true}
             message={(message as string[])}
             func={navigateTo}
+            funcTwo={reload}
         />}
         <Navigation/>
         <Form/>

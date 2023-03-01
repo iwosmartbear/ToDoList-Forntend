@@ -55,7 +55,7 @@ export function Form() {
         <Input
             type="text"
             value={toDo.category}
-            text="Category of task: "
+            text="Category: "
             name="mainInputCategory"
             className="mainInputCategory"
             minLength={2}
@@ -63,7 +63,7 @@ export function Form() {
             func={(e) => handleChange("category", e.target.value)}
         />
         <MySelect
-            text="Choose priority"
+            text="Priority"
 
             className="mainSelectPriority"
             options={prioritiesArray}
@@ -72,7 +72,7 @@ export function Form() {
         <Input
             type="date"
             value={toDo.dueDate as string}
-            text="Due Date: "
+            text="Due: "
             name={new Date().getDate().toString()}
             className="mainInputDate"
             func={(e) => handleChange("dueDate", e.target.value)}
