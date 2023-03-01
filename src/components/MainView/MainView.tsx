@@ -23,7 +23,7 @@ export const MainView = () => {
         {!showMainView ?
             <div>
                 {isMessage || <Messager
-                    text="Loading..."
+                    title="Loading..."
                     isButton={false}
                     className="message__content"
                     message={["waiting for data"]}

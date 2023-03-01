@@ -9,10 +9,10 @@ import {ToDoObject} from "../../types/fetchTypes";
 export const Sorter = () => {
     const {direction, setSortBy, setDirection, sortListOfToDos, listOfToDos} = useContext(ToDoListContext);
 
-    const handleSortingClick = (sortBy: SortBy): void => {
-        setSortBy(sortBy);
+    const handleSortingClick = (sortByFromClick: SortBy): void => {
+        setSortBy(sortByFromClick);
         setDirection(!direction);
-        sortListOfToDos(sortBy, listOfToDos as ToDoObject[], direction)
+        sortListOfToDos(sortByFromClick, listOfToDos as ToDoObject[], direction)
     }
 
     return <div className="sorter">

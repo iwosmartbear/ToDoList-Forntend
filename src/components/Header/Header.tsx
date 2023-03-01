@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
+import {Navigation} from "../Navigation/Navigation";
 
 import {Form} from "../common/Form/Form";
-import {Navigation} from "../Navigation/Navigation";
 import {Messager} from "../Messager/Mesager";
 import {ToDoListContext} from "../../context/ToDoListContextProvider";
 
@@ -21,7 +21,7 @@ export const Header = () => {
     }
     return <div className="header">
         {isMessage && <Messager
-            text="Loading..."
+            title="Loading..."
             isButton={true}
             type="button"
             className="message__content"

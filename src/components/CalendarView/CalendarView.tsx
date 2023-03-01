@@ -36,7 +36,7 @@ export const CalendarView = () => {
     return <div className="calendar">
         <h1>CalendarView</h1>
         {showToDoListMessage && <Messager
-            text={`${(tempToDosList as []).length === 0 ? "No ToDos this Day" : "Here's your list of ToDos for this day"}`}
+            title={`${(tempToDosList as []).length === 0 ? "No ToDos this Day" : "Here's your list of ToDos for this day"}`}
             isButton={false}
             className="message__content"
             message={[`${(tempToDosList as []).length === 0 ? "No ToDos this Day" : ""}`]}
@@ -59,7 +59,7 @@ export const CalendarView = () => {
             /> :
             <div>
                 {isMessage || <Messager
-                    text="Loading..."
+                    title="Loading..."
                     isButton={false}
                     className="message__content"
                     message={["waiting for data"]}

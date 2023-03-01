@@ -6,9 +6,10 @@ import {ToDoInMessanger} from "../ToDoInMessanger/ToDoInMessanger";
 import {MyProgressBar} from "../MyPreogressBar/MyProgressBar";
 
 import './Mesager.css'
+import {checkIfDataIsGoodToShowInMessager, getPercentageOfClosedToDoList} from "../../utils/messagerHelper";
 
 interface Props {
-    text?: string;
+    title?: string;
     type?: "button" | "submit" | "reset" | undefined;
     className: string;
     message?: string[];
@@ -20,26 +21,35 @@ interface Props {
     isInMiddle?: boolean;
 }
 
-export const Messager = ({text, isButton, type, func, isInMiddle, message, tempToDosList, funcTwo}: Props) => {
+export const Messager = ({title, isButton, type, func, isInMiddle, message, tempToDosList, funcTwo}: Props) => {
 
 
     return (
         <div className={`messager${isInMiddle ? " isInMiddle" : ""}`}>
             <div className={`message__content`}>
-                <h1>{text}</h1>
-                {message && (message as string[]).length !== 0 && message[0] !== "" && <p>Message: {message}</p>}
-                {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && <MyProgressBar percentage={(tempToDosList.filter(e => e.isOpen === 0).length/tempToDosList.length)*100}/>}
-                {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && tempToDosList.map(el =>
+                <h1>{title}</h1>
+                {checkIfDataIsGoodToShowInMessager(message as string[]) && <p>Message: {message}</p>}
+                {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && <MyProgressBar percentage={getPercentageOfClosedToDoList(tempToDosList as ToDoObject[])}/>}
+                {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && (tempToDosList as ToDoObject[]).map(el =>
                     <ToDoInMessanger key={el.id}
                                      taskContent={el.taskContent}
                                      priority={el.priority}
                                      isOpen={el.isOpen}/>)}
 
             </div>
-            {isButton && <Button text='Load Again' type={type} className="message__button" func={funcTwo}/>}
+            {isButton && <Button
+                text='Load Again'
+                type={type}
+                className="message__button"
+                func={funcTwo}
+            />}
             {isButton &&
-                <Button text={`${window.location.pathname === '/' ? 'To CalendarView' : 'To Home Page'}`} type={type}
-                        className="message__button" func={func}/>}
+                <Button
+                    text={`${window.location.pathname === '/' ? 'To CalendarView' : 'To Home Page'}`}
+                    type={type}
+                    className="message__button"
+                    func={func}
+                />}
         </div>
     )
 }
