@@ -3,6 +3,7 @@ import {MouseEventHandler} from "react";
 import {Button} from "../common/Button/Button";
 import {ToDoObject} from "../../types/fetchTypes";
 import {ToDoInMessanger} from "../ToDoInMessanger/ToDoInMessanger";
+import {MyProgressBar} from "../MyPreogressBar/MyProgressBar";
 
 import './Mesager.css'
 
@@ -27,7 +28,7 @@ export const Messager = ({text, isButton, type, func, isInMiddle, message, tempT
             <div className={`message__content`}>
                 <h1>{text}</h1>
                 {message && (message as string[]).length !== 0 && message[0] !== "" && <p>Message: {message}</p>}
-
+                {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && <MyProgressBar percentage={(tempToDosList.filter(e => e.isOpen === 0).length/tempToDosList.length)*100}/>}
                 {tempToDosList && (tempToDosList as ToDoObject[]).length !== 0 && tempToDosList.map(el =>
                     <ToDoInMessanger key={el.id}
                                      taskContent={el.taskContent}
