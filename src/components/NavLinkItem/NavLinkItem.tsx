@@ -6,10 +6,11 @@ interface props {
     className: string;
     text: string;
 }
-export const NavLinkItem=({to, className, text}:props)=>{
+
+export const NavLinkItem = ({to, className, text}: props) => {
 
     return <NavLink
-            to={to}
-            className={className}
-        >{text}</NavLink>
+        to={to}
+        className={className}
+    >{text}</NavLink>
 }

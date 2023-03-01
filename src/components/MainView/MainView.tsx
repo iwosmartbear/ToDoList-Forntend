@@ -1,16 +1,44 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
+
 import {ToDoDTO} from "../../types/fetchTypes";
+import {ToDoItem} from "../ToDoItem/ToDoItem";
+import {ToDoListContext} from "../../context/ToDoListContextProvider";
+import {Sorter} from "../Sorter/Sorter";
+import {Messager} from "../Messager/Mesager";
 
-interface props {
-    listOfToDos: ToDoDTO[];
-}
+export const MainView = () => {
+    const {listOfToDos, isMessage, resetError} = useContext(ToDoListContext);
+    const [showMainView, setShowMainView] = useState(false);
 
-export const MainView=({listOfToDos}: props)=>{
+    useEffect(() => {
+        if (listOfToDos) {
+            setShowMainView(true);
+        }
+        resetError();
+    }, [listOfToDos])
 
     return <div className="mainView">
         <h1>MainView</h1>
-        {[listOfToDos].length === 0 ?
-            <p>Nothing to show!</p> :
-            (listOfToDos as ToDoDTO[]).map(el=><p key={(Math.random()*10000)}>task content: {el.taskContent}; task: category: {el.category}; task due date: {el.dueDate as string}</p>)}
+        <Sorter></Sorter>
+        {!showMainView ?
+            <div>
+                {isMessage || <Messager
+                    text="Loading..."
+                    isButton={false}
+                    className="message__content"
+                    message={["waiting for data"]}
+                />}
+            </div> :
+            (listOfToDos as ToDoDTO[]).map(el => <ToDoItem
+                key={el.id}
+                id={el.id}
+                ownerId={el.ownerId}
+                taskContent={el.taskContent}
+                category={el.category}
+                priority={el.priority}
+                isOpen={el.isOpen}
+                dueDate={el.dueDate}
+            />)
+        }
     </div>
 }

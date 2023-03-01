@@ -1,0 +1,15 @@
+.ToDoItemMessanger {
+    width: 90%;
+    height: 3rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+    color: white;
+    text-align: center;
+    vertical-align: center;
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 10rem;
+    padding: 1rem;
+    margin: .3rem auto;
+    font-weight: bolder;
+}

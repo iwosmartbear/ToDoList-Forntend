@@ -3,6 +3,7 @@ import {ToDoDTO} from "../types/fetchTypes";
 import {changeDateFormat} from "./functions";
 
 export const clearToDoObject: ToDoDTO = {
+    id: "",
     category: "",
     dueDate: changeDateFormat(new Date()),
     isOpen: 1,

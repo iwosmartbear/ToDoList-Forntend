@@ -1,20 +1,25 @@
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
-import {FormEvent, useState} from "react";
-
-import './Form.css'
+import {FormEvent, useContext, useState} from "react";
 import {ToDoDTO} from "../../../types/fetchTypes";
 import {clearToDoObject} from "../../../utils/variables";
 import {changeDateFormat, fetchToAPI} from "../../../utils/functions";
+import {prioritiesArray, stringToPriority} from "../../../utils/styleFunctions";
+import {MySelect} from "../Select/Select";
+import {ToDoListContext} from "../../../context/ToDoListContextProvider";
+
+
+import './Form.css'
 
 
 export function Form() {
+    const {updateToDoListInContext} = useContext(ToDoListContext);
     const [toDo, setToDo] = useState<ToDoDTO>(clearToDoObject);
 
     function handleChange(nameOfValue: string, val: string) {
         setToDo({
             ...toDo,
-            [`${nameOfValue}`]: val,
+            [`${nameOfValue}`]: nameOfValue === "priority" ? stringToPriority(val) : val,
         })
     }
 
@@ -28,9 +33,9 @@ export function Form() {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const response = fetchToAPI("POST", '/add', toDo);
-
+            const response = fetchToAPI("POST", '/add', toDo).then(e => updateToDoListInContext());
             clearState();
+
         } catch (e) {
             console.error(e);
         }
@@ -50,33 +55,29 @@ export function Form() {
         <Input
             type="text"
             value={toDo.category}
-            text="Category of task: "
+            text="Category: "
             name="mainInputCategory"
             className="mainInputCategory"
             minLength={2}
             maxLength={25}
             func={(e) => handleChange("category", e.target.value)}
         />
-        <Input
-            type="number"
-            value={toDo.priority}
-            text="Priority: "
-            name="mainInputPriority"
-            className="mainInputPriority"
-            min={1}
-            max={5}
+        <MySelect
+            text="Priority"
+
+            className="mainSelectPriority"
+            options={prioritiesArray}
             func={(e) => handleChange("priority", e.target.value)}
         />
         <Input
             type="date"
             value={toDo.dueDate as string}
-            text="Due Date: "
+            text="Due: "
             name={new Date().getDate().toString()}
             className="mainInputDate"
             func={(e) => handleChange("dueDate", e.target.value)}
         />
         <Button
-
             className="formButton"
             text="Send ToDO"
             type="submit"

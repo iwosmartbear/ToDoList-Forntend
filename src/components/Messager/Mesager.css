@@ -1,0 +1,35 @@
+.messager {
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    min-height: 30vh;
+    min-width: 30vw;
+    height: auto;
+    border: 1px solid black;
+    box-shadow: 0 0 1vh black;
+    border-radius: 2rem;
+    background-color: white;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    z-index: 4;
+}
+
+.message__content {
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    line-height: 3rem;
+}
+
+.message__button {
+    margin-top: 0;
+    width: 90%;
+    padding: .4rem;
+    margin-bottom: 1rem;
+}
+
+.isInMiddle {
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
