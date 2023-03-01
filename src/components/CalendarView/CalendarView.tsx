@@ -26,11 +26,11 @@ export const CalendarView = () => {
         setTempToDosList((listOfToDos as ToDoObject[]).filter((el) => {
             return el.dueDate === value
         }));
-        setShowToDoListMessage(true)
+        setShowToDoListMessage(true);
     }
 
     function handleOfMouse() {
-        setShowToDoListMessage(false)
+            setShowToDoListMessage(false);
     }
 
     return <div className="calendar">
@@ -46,8 +46,8 @@ export const CalendarView = () => {
             <Calendar
                 tileClassName="calendar-day"
                 tileContent={
-                    ({date, view, activeStartDate}): JSX.Element | null => view === 'month' ?
-                        <div className="div-in-button" onMouseEnter={(e) => {
+                    ({date, view}): JSX.Element | null => view === 'month' ?
+                        <div className="div-in-button" onMouseEnter={() => {
                             handleOnMouse(changeDateFormat(date));
                         }}
                              onMouseOut={() => {

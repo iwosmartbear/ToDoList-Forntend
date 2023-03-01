@@ -13,12 +13,13 @@ interface Props {
     message?: string[];
     tempToDosList?: ToDoObject[];
     func?: MouseEventHandler<HTMLButtonElement>;
+    funcTwo?: MouseEventHandler<HTMLButtonElement>;
     disabled?: boolean;
     isButton: boolean;
     isInMiddle?: boolean;
 }
 
-export const Messager = ({text, isButton, type, func, isInMiddle, message, tempToDosList}: Props) => {
+export const Messager = ({text, isButton, type, func, isInMiddle, message, tempToDosList, funcTwo}: Props) => {
 
 
     return (
@@ -34,7 +35,7 @@ export const Messager = ({text, isButton, type, func, isInMiddle, message, tempT
                                      isOpen={el.isOpen}/>)}
 
             </div>
-            {isButton && <Button text='Load Again' type={type} className="message__button" func={func}/>}
+            {isButton && <Button text='Load Again' type={type} className="message__button" func={funcTwo}/>}
             {isButton &&
                 <Button text={`${window.location.pathname === '/' ? 'To CalendarView' : 'To Home Page'}`} type={type}
                         className="message__button" func={func}/>}
