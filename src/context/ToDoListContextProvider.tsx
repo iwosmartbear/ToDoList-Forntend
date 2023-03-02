@@ -76,6 +76,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
                 listOfToDos: data,
             }
         }));
+
     }, []);
 
     async function updateToDoListInContext() {
@@ -91,7 +92,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             return {
                 ...prevData,
                 isMessage: !!data,
-                listOfToDos: data,
+                listOfToDos: sortFunction(toDoListContext.sortBy as SortBy, data as ToDoObject[], toDoListContext.direction),
             }
         }));
     }

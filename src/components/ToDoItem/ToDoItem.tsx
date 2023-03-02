@@ -45,7 +45,6 @@ export const ToDoItem = ({extId, dueDate, isOpen, taskContent, priority, categor
             ...toDo,
             [`${nameOfValue}`]: nameOfValue === "priority" ? stringToPriority(val) : val,
         })
-        updateToDoListInContext();
     }
 
     return <div className={`ToDoItem${isOpen ? "" : " toDo__closed"} ${priorityToClassChecker(priority)}`}>

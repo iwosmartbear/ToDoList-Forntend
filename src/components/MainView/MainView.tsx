@@ -1,13 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
 
-import {ToDoDTO} from "../../types/fetchTypes";
+import {ToDoObject} from "../../types/fetchTypes";
 import {ToDoItem} from "../ToDoItem/ToDoItem";
 import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Sorter} from "../Sorter/Sorter";
 import {Messager} from "../Messager/Mesager";
+import {SortBy, sortFunction} from "../../utils/sortFunctions";
 
 export const MainView = () => {
-    const {listOfToDos, isMessage, resetError} = useContext(ToDoListContext);
+    const {listOfToDos, isMessage, resetError, sortBy, direction} = useContext(ToDoListContext);
     const [showMainView, setShowMainView] = useState(false);
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export const MainView = () => {
                     message={["waiting for data"]}
                 />}
             </div> :
-            (listOfToDos as ToDoDTO[]).map(el => <ToDoItem
+            sortFunction(sortBy as SortBy, listOfToDos as ToDoObject[], direction).map(el => <ToDoItem
                 key={el.extId}
                 extId={el.extId}
                 ownerId={el.ownerId}
