@@ -4,7 +4,7 @@ import {fetchToAPI} from "../utils/functions";
 import {SortBy, sortFunction} from "../utils/sortFunctions";
 
 export interface ContextInterFace {
-    listOfToDos?: ToDoObject | ToDoObject[] | Promise<ToDoObject> | Promise<ToDoObject[]>;
+    listOfToDos?: ToDoObject[] | Promise<ToDoObject[]>;
     editedToDo?: ToDoObject;
     sortBy?: SortBy;
     direction?: boolean;
@@ -67,6 +67,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
                 return data;
             } catch (err) {
                 setErrorMessage(err as Error);
+                throw new Error((err as Error).message)
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace) => {
@@ -86,6 +87,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
                 return data;
             } catch (err) {
                 setErrorMessage(err as Error);
+                throw new Error((err as Error).message)
             }
         }
         doFetch().then(data => setToDoListContext((prevData: ContextInterFace) => {

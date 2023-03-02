@@ -16,11 +16,13 @@ export const CalendarView = () => {
     const [tempToDosList, setTempToDosList] = useState(listOfToDos);
 
     useEffect(() => {
-        if (listOfToDos) {
-            setShowCalendar(true)
+        if (listOfToDos && (listOfToDos as ToDoObject[]).length > 0 ) {
+            setShowCalendar(true);
+        } else {
+            setShowCalendar(false);
         }
-        resetError();//@TODO check if this is needed
-    }, [listOfToDos]);
+        resetError();
+    }, [listOfToDos])
 
     function handleOnMouse(value: string) {
         setTempToDosList((listOfToDos as ToDoObject[]).filter((el) => {

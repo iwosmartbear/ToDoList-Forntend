@@ -12,10 +12,13 @@ export const MainView = () => {
     const [showMainView, setShowMainView] = useState(false);
 
     useEffect(() => {
-        if (listOfToDos) {
+        if (listOfToDos && (listOfToDos as ToDoObject[]).length > 0 ) {
             setShowMainView(true);
+            resetError();
+        } else {
+            setShowMainView(false);
         }
-        resetError();
+
     }, [listOfToDos])
 
     return <div className="mainView">
