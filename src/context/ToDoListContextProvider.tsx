@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from "react";
 import {ToDoObject} from "../types/fetchTypes";
+import { ErrPretender } from "../types/ToDoContextTypes";
 import {fetchToAPI} from "../utils/functions";
 import {SortBy, sortFunction} from "../utils/sortFunctions";
 
@@ -15,6 +16,7 @@ export interface ContextInterFace {
     setDirection: (direction?: boolean) => void;
     sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean) => void;
     setErrorMessage: (err: Error) => void;
+    setPretendErrorMessage: (errPretender: ErrPretender) => void;
     resetError: () => void;
     setIsMessage: (isMessage: boolean) => void;
 
@@ -32,6 +34,8 @@ export const ToDoListContext = createContext<ContextInterFace>({
     },
     setErrorMessage: () => {
     },
+    setPretendErrorMessage: () => {
+    },
     resetError: () => {
     },
     setIsMessage: () => {
@@ -41,6 +45,8 @@ export const ToDoListContext = createContext<ContextInterFace>({
 type Props = {
     children: JSX.Element,
 }
+
+
 
 export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
     const [toDoListContext, setToDoListContext] = useState<ContextInterFace>({
@@ -55,6 +61,7 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
         setDirection,
         sortListOfToDos,
         setErrorMessage,
+        setPretendErrorMessage,
         resetError,
         setIsMessage,
     });
@@ -113,11 +120,20 @@ export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
             return {
                 ...prevData,
                 isMessage: !!(err as Error).message,
-                message: (err as Error).message ? [(err as Error).message] : ["Something went wrong"],
+                message: (err as Error).message  ? [(err as Error).message] : ["Something went wrong"],
             }
         })
     }
 
+    function setPretendErrorMessage(errPretender?: ErrPretender) {
+        setToDoListContext((prevData: ContextInterFace) => {
+            return {
+                ...prevData,
+                isMessage: errPretender?.isMessage as boolean,
+                message: errPretender?.message ? [ errPretender?.message as string] : ["Something went wrong"],
+            }
+        })
+    }
     function resetError() {
         setToDoListContext((prevData: ContextInterFace) => {
             return {

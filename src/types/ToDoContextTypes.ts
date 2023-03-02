@@ -10,3 +10,8 @@ interface ReactNodeArray extends Array<ReactNode> {
 type ReactFragment = {} | ReactNodeArray;
 export type ReactNode = ReactChild | ReactFragment | ReactPortal | boolean | null | undefined;
 
+export interface ErrPretender {
+    isMessage: boolean;
+    message: string;
+}
+

@@ -7,15 +7,22 @@ import {Messager} from "../Messager/Mesager";
 import {changeDateFormat} from "../../utils/functions";
 
 import './CalendarView.css';
+import {ErrPretender} from "../../types/ToDoContextTypes";
 
 export const CalendarView = () => {
-    const {listOfToDos, isMessage, resetError} = useContext(ToDoListContext);
+    const {listOfToDos, isMessage, resetError, setPretendErrorMessage} = useContext(ToDoListContext);
     const [showCalendar, setShowCalendar] = useState(false);
     const [value, onChange] = useState(new Date());
     const [showToDoListMessage, setShowToDoListMessage] = useState(false);
     const [tempToDosList, setTempToDosList] = useState(listOfToDos);
 
     useEffect(() => {
+        setTimeout(()=>{
+            setPretendErrorMessage({
+                isMessage: true,
+                message: "Sorry, it takes too long",
+            } as ErrPretender)
+        }, 2500)
         if (listOfToDos && (listOfToDos as ToDoObject[]).length > 0 ) {
             setShowCalendar(true);
         } else {

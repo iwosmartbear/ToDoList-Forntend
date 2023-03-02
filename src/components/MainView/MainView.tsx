@@ -6,18 +6,25 @@ import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Sorter} from "../Sorter/Sorter";
 import {Messager} from "../Messager/Mesager";
 import {SortBy, sortFunction} from "../../utils/sortFunctions";
+import {ErrPretender} from "../../types/ToDoContextTypes";
 
 export const MainView = () => {
-    const {listOfToDos, isMessage, resetError, sortBy, direction} = useContext(ToDoListContext);
+    const {listOfToDos, isMessage, resetError, sortBy, direction, setPretendErrorMessage} = useContext(ToDoListContext);
     const [showMainView, setShowMainView] = useState(false);
 
     useEffect(() => {
+        setTimeout(()=>{
+            setPretendErrorMessage({
+                isMessage: true,
+                message: "Sorry, it takes too long",
+            } as ErrPretender)
+        }, 2500)
         if (listOfToDos && (listOfToDos as ToDoObject[]).length > 0 ) {
             setShowMainView(true);
-            resetError();
         } else {
             setShowMainView(false);
         }
+            resetError();
 
     }, [listOfToDos])
 
