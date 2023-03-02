@@ -3,7 +3,7 @@ export interface headerAndBodyObject {
 }
 
 export interface ToDoDTO {
-    id: string;
+    extId: string;
     ownerId: string;
     taskContent: string;
     category: string;

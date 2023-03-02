@@ -1,9 +1,9 @@
-import {config} from "../config/config";
 import {ToDoDTO} from "../types/fetchTypes";
 import {changeDateFormat} from "./functions";
+import {config} from "../config/config";
 
 export const clearToDoObject: ToDoDTO = {
-    id: "",
+    extId: "",
     category: "",
     dueDate: changeDateFormat(new Date()),
     isOpen: 1,

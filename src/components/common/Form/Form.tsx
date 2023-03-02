@@ -1,13 +1,13 @@
+import {FormEvent, useContext, useState} from "react";
+import {v4 as uuid} from 'uuid';
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
-import {FormEvent, useContext, useState} from "react";
 import {ToDoDTO} from "../../../types/fetchTypes";
 import {clearToDoObject} from "../../../utils/variables";
 import {changeDateFormat, fetchToAPI} from "../../../utils/functions";
 import {prioritiesArray, stringToPriority} from "../../../utils/styleFunctions";
 import {MySelect} from "../Select/Select";
 import {ToDoListContext} from "../../../context/ToDoListContextProvider";
-
 
 import './Form.css'
 
@@ -30,10 +30,14 @@ export function Form() {
         });
     }
 
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const response = fetchToAPI("POST", '/add', toDo).then(e => updateToDoListInContext());
+
+            const response = await fetchToAPI("POST", '/add', {
+                ...toDo,
+                extId: uuid(),
+            }).then(e => updateToDoListInContext());
             clearState();
 
         } catch (e) {
@@ -64,8 +68,8 @@ export function Form() {
         />
         <MySelect
             text="Priority"
-
             className="mainSelectPriority"
+            val={toDo.priority}
             options={prioritiesArray}
             func={(e) => handleChange("priority", e.target.value)}
         />
@@ -79,7 +83,7 @@ export function Form() {
         />
         <Button
             className="formButton"
-            text="Send ToDO"
+            text="Send ToDo"
             type="submit"
         />
     </form>

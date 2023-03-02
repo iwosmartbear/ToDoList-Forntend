@@ -30,8 +30,8 @@ export const MainView = () => {
                 />}
             </div> :
             (listOfToDos as ToDoDTO[]).map(el => <ToDoItem
-                key={el.id}
-                id={el.id}
+                key={el.extId}
+                extId={el.extId}
                 ownerId={el.ownerId}
                 taskContent={el.taskContent}
                 category={el.category}

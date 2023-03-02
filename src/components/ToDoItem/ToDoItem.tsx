@@ -1,6 +1,5 @@
 import {ToDoDTO} from "../../types/fetchTypes";
 
-import './ToDoItem.css'
 import {Button} from "../common/Button/Button";
 import {prioritiesArray, priorityToClassChecker, stringToPriority} from "../../utils/styleFunctions";
 import {fetchToAPI} from "../../utils/functions";
@@ -9,11 +8,12 @@ import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Input} from "../common/Input/Input";
 import {MySelect} from "../common/Select/Select";
 
+import './ToDoItem.css'
 
-export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, ownerId}: ToDoDTO) => {
+export const ToDoItem = ({extId, dueDate, isOpen, taskContent, priority, category, ownerId}: ToDoDTO) => {
     const {updateToDoListInContext, setErrorMessage} = useContext(ToDoListContext);
     const [toDo, setToDo] = useState({
-        id,
+        extId,
         dueDate,
         ownerId,
         isOpen,
@@ -48,6 +48,7 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
             ...toDo,
             [`${nameOfValue}`]: nameOfValue === "priority" ? stringToPriority(val) : val,
         })
+        updateToDoListInContext();
     }
 
     return <div className={`ToDoItem${isOpen ? "" : " toDo__closed"} ${priorityToClassChecker(priority)}`}>
@@ -71,8 +72,6 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
             func={(e) => handleChange("category", e.target.value)}
             funcTwo={() => finishEditing()}
         />
-        {/*<div className="category">{category}</div>*/}
-        {/*<div className="priority">{priorityToString(priority)}</div>*/}
         <MySelect
             text=""
             selectClass="priority"
@@ -82,7 +81,6 @@ export const ToDoItem = ({id, dueDate, isOpen, taskContent, priority, category, 
             func={(e) => handleChange("priority", e.target.value)}
             funcTwo={() => finishEditing()}
         />
-        {/*<div className="dueDate">{dueDate as string}</div>*/}
         <Input
             type="date"
             value={toDo.dueDate as string}

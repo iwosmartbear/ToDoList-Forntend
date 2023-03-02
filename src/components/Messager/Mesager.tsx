@@ -4,9 +4,9 @@ import {Button} from "../common/Button/Button";
 import {ToDoObject} from "../../types/fetchTypes";
 import {ToDoInMessanger} from "../ToDoInMessanger/ToDoInMessanger";
 import {MyProgressBar} from "../MyPreogressBar/MyProgressBar";
+import {checkIfDataIsGoodToShowInMessager, getPercentageOfClosedToDoList} from "../../utils/messagerHelper";
 
 import './Mesager.css'
-import {checkIfDataIsGoodToShowInMessager, getPercentageOfClosedToDoList} from "../../utils/messagerHelper";
 
 interface Props {
     title?: string;
@@ -31,7 +31,7 @@ export const Messager = ({title, isButton, type, func, isInMiddle, message, temp
                 {checkIfDataIsGoodToShowInMessager(message as string[]) && <p>Message: {message}</p>}
                 {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && <MyProgressBar percentage={getPercentageOfClosedToDoList(tempToDosList as ToDoObject[])}/>}
                 {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && (tempToDosList as ToDoObject[]).map(el =>
-                    <ToDoInMessanger key={el.id}
+                    <ToDoInMessanger key={el.extId}
                                      taskContent={el.taskContent}
                                      priority={el.priority}
                                      isOpen={el.isOpen}/>)}

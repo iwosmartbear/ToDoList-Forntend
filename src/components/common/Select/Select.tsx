@@ -1,7 +1,7 @@
 import {ChangeEvent} from "react";
 
 import './Select.css';
-import {stringToPriority} from "../../../utils/styleFunctions";
+import {priorityToString} from "../../../utils/styleFunctions";
 
 interface props {
     text: string;
@@ -20,10 +20,11 @@ export const MySelect = ({text, className, options, func, selectClass, funcTwo, 
             className={selectClass}
             onChange={func || undefined}
             onBlur={funcTwo || undefined}
+            defaultValue={priorityToString(val as number) || undefined}
         >
             {options.map((el, ind) => <option
                 key={ind}
-                selected={val === stringToPriority(el)}
+                value={el}
             >{el}</option>)}
         </select>
     </label>
