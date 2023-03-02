@@ -1,9 +1,8 @@
+import React, {useContext, useState} from "react";
 import {ToDoDTO} from "../../types/fetchTypes";
-
 import {Button} from "../common/Button/Button";
 import {prioritiesArray, priorityToClassChecker, stringToPriority} from "../../utils/styleFunctions";
 import {fetchToAPI} from "../../utils/functions";
-import React, {useContext, useState} from "react";
 import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Input} from "../common/Input/Input";
 import {MySelect} from "../common/Select/Select";
@@ -23,11 +22,9 @@ export const ToDoItem = ({extId, dueDate, isOpen, taskContent, priority, categor
     } as ToDoDTO);
 
     function handleClose() {
-
         const response = fetchToAPI("PUT", '/edit', {...toDo, isOpen: isOpen === 1 ? 0 : 1})
             .then(e => updateToDoListInContext())
             .catch(err => setErrorMessage(err as Error));
-
 
     }
 
@@ -87,6 +84,7 @@ export const ToDoItem = ({extId, dueDate, isOpen, taskContent, priority, categor
             name={new Date().getDate().toString()}
             className="dueDate"
             func={(e) => handleChange("dueDate", e.target.value)}
+            funcTwo={() => finishEditing()}
         />
 
         <Button
