@@ -11,3 +11,28 @@
     align-content: center;
     justify-items: center;
 }
+@media screen and (max-width: 800px) {
+    .main-form {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-column-gap: 0;
+        height: auto;
+        width: auto;
+    }
+    .mainInput__label {
+        grid-area: 1/1/2/4;
+    }
+    .mainInputCategory__label {
+        grid-area: 2/3/3/4;
+    }
+    .mainSelectPriority__label {
+        grid-area: 2/1/3/2;
+    }
+    .mainInputDate__label {
+        grid-area: 2/2/3/3;
+    }
+    .formButton{
+        grid-area: 3/2/4/3;
+        margin-top: 1.2rem;
+    }
+}

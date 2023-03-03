@@ -17,17 +17,11 @@ input {
 .mainInput__label {
     grid-area: 1/1/2/6;
 }
-
 .mainInputDate__label {
     grid-area: 1/9/2/11;
 }
-
 .mainInputPriority {
 }
-
-/*.mainInputPriority__label{*/
-/*    grid-area: 1/8/2/9;*/
-/*}*/
 .mainInputCategory__label {
     grid-area: 1/6/2/8;
 }
