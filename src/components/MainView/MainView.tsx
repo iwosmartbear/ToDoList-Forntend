@@ -2,11 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 
 import {ToDoObject} from "../../types/fetchTypes";
 import {ToDoItem} from "../ToDoItem/ToDoItem";
-import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Sorter} from "../Sorter/Sorter";
 import {Messager} from "../Messager/Mesager";
 import {SortBy, sortFunction} from "../../utils/sortFunctions";
 import {ErrPretender} from "../../types/ToDoContextTypes";
+import { ToDoListContext } from "../../context/ToDoListContextCreateContext";
 
 export const MainView = () => {
     const {listOfToDos, isMessage, resetError, sortBy, direction, setPretendErrorMessage} = useContext(ToDoListContext);

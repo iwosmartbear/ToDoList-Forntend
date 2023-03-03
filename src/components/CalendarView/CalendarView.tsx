@@ -2,10 +2,10 @@ import React, {useContext, useEffect, useState} from "react";
 import Calendar from "react-calendar";
 
 import {ToDoObject} from "../../types/fetchTypes";
-import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Messager} from "../Messager/Mesager";
 import {changeDateFormat} from "../../utils/functions";
 import {ErrPretender} from "../../types/ToDoContextTypes";
+import { ToDoListContext } from "../../context/ToDoListContextCreateContext";
 
 import './CalendarView.css';
 

@@ -3,9 +3,9 @@ import {ToDoDTO} from "../../types/fetchTypes";
 import {Button} from "../common/Button/Button";
 import {prioritiesArray, priorityToClassChecker, stringToPriority} from "../../utils/styleFunctions";
 import {fetchToAPI} from "../../utils/functions";
-import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {Input} from "../common/Input/Input";
 import {MySelect} from "../common/Select/Select";
+import { ToDoListContext } from "../../context/ToDoListContextCreateContext";
 
 import './ToDoItem.css'
 

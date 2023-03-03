@@ -29,7 +29,9 @@ export const Messager = ({title, isButton, type, func, isInMiddle, message, temp
             <div className={`message__content`}>
                 <h1>{title}</h1>
                 {checkIfDataIsGoodToShowInMessager(message as string[]) && <p>Message: {message}</p>}
-                {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && <MyProgressBar percentage={getPercentageOfClosedToDoList(tempToDosList as ToDoObject[])}/>}
+                {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && <MyProgressBar
+                    percentage={getPercentageOfClosedToDoList(tempToDosList as ToDoObject[])}
+                />}
                 {checkIfDataIsGoodToShowInMessager(tempToDosList as ToDoObject[]) && (tempToDosList as ToDoObject[]).map(el =>
                     <ToDoInMessanger key={el.extId}
                                      taskContent={el.taskContent}

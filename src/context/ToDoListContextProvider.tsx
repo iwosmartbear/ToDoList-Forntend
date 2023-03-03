@@ -1,52 +1,14 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ToDoObject} from "../types/fetchTypes";
 import { ErrPretender } from "../types/ToDoContextTypes";
 import {fetchToAPI} from "../utils/functions";
 import {SortBy, sortFunction} from "../utils/sortFunctions";
-
-export interface ContextInterFace {
-    listOfToDos?: ToDoObject[] | Promise<ToDoObject[]>;
-    editedToDo?: ToDoObject;
-    sortBy?: SortBy;
-    direction?: boolean;
-    isMessage: boolean;
-    message?: (string | ToDoObject)[];
-    updateToDoListInContext: () => void;
-    setSortBy: (sortBy: SortBy) => void;
-    setDirection: (direction?: boolean) => void;
-    sortListOfToDos: (sortBy: SortBy, listOfToDos: ToDoObject[], direction?: boolean) => void;
-    setErrorMessage: (err: Error) => void;
-    setPretendErrorMessage: (errPretender: ErrPretender) => void;
-    resetError: () => void;
-    setIsMessage: (isMessage: boolean) => void;
-
-}
-
-export const ToDoListContext = createContext<ContextInterFace>({
-    isMessage: false,
-    updateToDoListInContext: () => {
-    },
-    setSortBy: () => {
-    },
-    setDirection: () => {
-    },
-    sortListOfToDos: () => {
-    },
-    setErrorMessage: () => {
-    },
-    setPretendErrorMessage: () => {
-    },
-    resetError: () => {
-    },
-    setIsMessage: () => {
-    },
-});
+import { ToDoListContext } from "./ToDoListContextCreateContext";
+import {ContextInterFace} from "./ToDoListContextInterfae";
 
 type Props = {
     children: JSX.Element,
 }
-
-
 
 export const ToDoListContextProvider: React.FC<Props> = ({children}) => {
     const [toDoListContext, setToDoListContext] = useState<ContextInterFace>({

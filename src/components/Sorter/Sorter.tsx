@@ -1,8 +1,8 @@
 import {useContext} from "react";
 import {Button} from "../common/Button/Button";
-import {ToDoListContext} from "../../context/ToDoListContextProvider";
 import {SortBy} from "../../utils/sortFunctions";
 import {ToDoObject} from "../../types/fetchTypes";
+import {ToDoListContext} from "../../context/ToDoListContextCreateContext";
 
 import './Sorter.css'
 
@@ -12,7 +12,7 @@ export const Sorter = () => {
     const handleSortingClick = (sortByFromClick: SortBy): void => {
         setSortBy(sortByFromClick);
         setDirection(!direction);
-        sortListOfToDos(sortByFromClick, listOfToDos as ToDoObject[], direction)
+        sortListOfToDos(sortByFromClick, listOfToDos as ToDoObject[], direction);
     }
 
     return <div className="sorter">
