@@ -87,13 +87,13 @@ export const ToDoItem = ({extId, dueDate, isOpen, taskContent, priority, categor
         />
 
         <Button
-            text={isOpen ? "Close" : "Reopen"}
+            text={isOpen ? "🏁" : "💊"}
             type="button"
             className={isOpen ? "button__opened" : "button__closed"}
             func={handleClose}
         ></Button>
         <Button
-            text="delete"
+            text="🗑"
             type="button"
             className="delete"
             func={deleteElement}
