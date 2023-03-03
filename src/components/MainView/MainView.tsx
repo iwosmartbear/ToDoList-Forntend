@@ -13,7 +13,7 @@ export const MainView = () => {
     const [showMainView, setShowMainView] = useState(false);
 
     useEffect(() => {
-        setTimeout(()=>{
+        const myTimeOut = setTimeout(()=>{
             setPretendErrorMessage({
                 isMessage: true,
                 message: "Sorry, it takes too long",
@@ -21,6 +21,7 @@ export const MainView = () => {
         }, 2500)
         if (listOfToDos && (listOfToDos as ToDoObject[]).length > 0 ) {
             setShowMainView(true);
+            clearTimeout(myTimeOut);
         } else {
             setShowMainView(false);
         }

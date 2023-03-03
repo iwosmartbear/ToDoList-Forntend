@@ -1,4 +1,3 @@
-
 import './MyProgressBar.css'
 
 type Props ={
@@ -10,9 +9,9 @@ export const MyProgressBar = ({percentage}: Props)=>{
         width: `${percentage}%`,
     }
 //@TODO change styling of progress bar text to show text of percentage on to of bar. not it can be covered
-    return <div className="progress-bar__all">
-        {percentage}% closed
-        <div  className="filler" style={fillerStyles}>
-        </div>
+    return <div className={`progress-bar__all ${Number(percentage)>= 40 && " text-hidden"}`}>
+        {/*{Number(percentage)<= 30 && `${percentage} % closed`}*/}
+        <p>{percentage}% closed</p>
+        {Number(percentage) > 0 && <div  className="filler" style={fillerStyles}>{Number(percentage) >= 40 && `${percentage} % closed`}</div>}
     </div>
 }

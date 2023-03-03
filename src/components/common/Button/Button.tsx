@@ -1,5 +1,6 @@
-import './Button.css'
 import {MouseEventHandler} from "react";
+
+import './Button.css'
 
 interface Props {
     text: string;

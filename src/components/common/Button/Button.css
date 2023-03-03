@@ -22,16 +22,19 @@ Button {
     background-color: #5a5656;
     color: white;
     text-shadow: 0 0 1vh black;
-    width: 40%;
+    width: auto;
+    min-width: 65%;
 }
 
 .button__closed {
     background-color: #ccc;
     color: black;
     text-shadow: 0 0 1vh white;
-    width: 40%;
+    width: auto;
+    min-width: 65%;
 }
 
 .delete {
-    width: 40%;
+    width: auto;
+    min-width: 65%;
 }
