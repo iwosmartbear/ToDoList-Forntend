@@ -30,6 +30,7 @@ export const CalendarView = () => {
             setShowCalendar(false);
         }
         resetError();
+        return ()=> clearTimeout(myTimeOut);
     }, [listOfToDos])
 
     function handleOnMouse(value: string) {

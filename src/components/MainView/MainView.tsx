@@ -26,8 +26,8 @@ export const MainView = () => {
             setShowMainView(false);
         }
             resetError();
-
-    }, [listOfToDos])
+    return ()=> clearTimeout(myTimeOut);
+    }, [listOfToDos]);
 
     return <div className="mainView">
         <h1>MainView</h1>
